@@ -1,0 +1,20 @@
+language: java
+jdk:
+  - openjdk8
+  - openjdk11
+addons:
+cache:
+  directories:
+    - $HOME/.m2
+install:
+  - export CODACY_COVERAGE_REPORTER_VERSION=6.0.0
+  - export CODACY_PROJECT_TOKEN=c10980d316d843d29e3fe0e9cbd85831
+  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/${CODACY_COVERAGE_REPORTER_VERSION}/codacy-coverage-reporter-${CODACY_COVERAGE_REPORTER_VERSION}-assembly.jar
+script:
+  - mvn clean install
+after_script:
+  - mvn jacoco:report -pl terasoluna-gfw-spring-boot-autoconfigure
+  - mvn jacoco:report -pl terasoluna-gfw-spring-boot-test-autoconfigure
+  - java -jar codacy-coverage-reporter-${CODACY_COVERAGE_REPORTER_VERSION}-assembly.jar report -l Java -r terasoluna-gfw-spring-boot-autoconfigure/target/site/jacoco/jacoco.xml --partial
+  - java -jar codacy-coverage-reporter-${CODACY_COVERAGE_REPORTER_VERSION}-assembly.jar report -l Java -r terasoluna-gfw-spring-boot-test-autoconfigure/target/site/jacoco/jacoco.xml --partial
+  - java -jar codacy-coverage-reporter-${CODACY_COVERAGE_REPORTER_VERSION}-assembly.jar final

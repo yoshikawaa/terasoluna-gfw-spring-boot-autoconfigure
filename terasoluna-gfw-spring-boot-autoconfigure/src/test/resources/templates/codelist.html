@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>codelist</title>
+</head>
+<body>
+    <ul th:each="item : ${#request.getAttribute('CL_SIMPLE')}">
+        <li th:text="${item.value}"></li>
+    </ul>
+    <ul th:each="item : ${#request.getAttribute('CODELIST_EXTEND')}">
+        <li th:text="${item.value}"></li>
+    </ul>
+</body>
+</html>
