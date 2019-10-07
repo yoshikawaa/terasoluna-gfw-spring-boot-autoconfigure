@@ -8,7 +8,7 @@ cache:
     - $HOME/.m2
 install:
   - export CODACY_COVERAGE_REPORTER_VERSION=6.0.0
-  - export CODACY_PROJECT_TOKEN=c10980d316d843d29e3fe0e9cbd85831
+  - export CODACY_PROJECT_TOKEN=742aa08a6b6f4aee9618841017e6a9c4
   - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/${CODACY_COVERAGE_REPORTER_VERSION}/codacy-coverage-reporter-${CODACY_COVERAGE_REPORTER_VERSION}-assembly.jar
 script:
   - mvn clean install
