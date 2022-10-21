@@ -21,6 +21,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
@@ -115,6 +117,13 @@ class AutoConfigureTerasolunaGfwTest {
 
     @SpringBootConfiguration
     static class TestConfig {
+
+        @Bean
+        SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeRequests().anyRequest().permitAll();
+            http.csrf().disable();
+            return http.build();
+        }
 
         @RestController
         @RequestMapping("/tracelogging")

@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-autoconfigure</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>terasoluna-gfw-spring-boot-autoconfigure</name>
     <description>Spring Boot Auto-Configure for Terasoluna Gfw</description>
@@ -64,12 +64,17 @@
         </repository>
     </distributionManagement>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
-        <relativePath></relativePath>
-    </parent>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -189,7 +194,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M3</version><!--$NO-MVN-MAN-VER$-->
+                <version>3.0.0-M7</version>
                 <configuration>
                     <argLine>${jacocoArgs}</argLine>
                 </configuration>
@@ -197,7 +202,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.4</version>
+                <version>0.8.8</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -217,13 +222,21 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>3.0</version>
+                <version>4.1</version>
                 <configuration>
-                    <header>NOTICE.txt</header>
-                    <includes>
-                        <include>pom.xml</include>
-                        <include>src/main/java/**</include>
-                    </includes>
+                    <mapping>
+                        <xml>XML_STYLE</xml>
+                        <java>JAVADOC_STYLE</java>
+                    </mapping>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>NOTICE.txt</header>
+                            <includes>
+                                <include>pom.xml</include>
+                                <include>src/main/java/**</include>
+                            </includes>
+                        </licenseSet>
+                    </licenseSets>
                 </configuration>
                 <executions>
                     <execution>
@@ -237,6 +250,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.4.1</version>
                 <configuration>
                     <show>protected</show>
                 </configuration>
@@ -252,6 +266,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -264,7 +279,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -279,12 +294,16 @@
     </build>
 
     <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <encoding>UTF-8</encoding>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
         <gpg.skip>true</gpg.skip>
-        <terasoluna-gfw.version>5.5.1.RELEASE</terasoluna-gfw.version>
-        <thymeleaf-extras-terasoluna-gfw.version>1.0.0</thymeleaf-extras-terasoluna-gfw.version>
-        <spring-test-terasoluna-gfw.version>1.0.0</spring-test-terasoluna-gfw.version>
+        <spring-boot.version>2.7.4</spring-boot.version>
+        <terasoluna-gfw.version>5.7.1.SP1.RELEASE</terasoluna-gfw.version>
+        <thymeleaf-extras-terasoluna-gfw.version>1.0.1-SNAPSHOT</thymeleaf-extras-terasoluna-gfw.version>
+        <spring-test-terasoluna-gfw.version>1.0.1-SNAPSHOT</spring-test-terasoluna-gfw.version>
     </properties>
 </project>

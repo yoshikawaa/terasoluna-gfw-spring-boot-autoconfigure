@@ -10,9 +10,9 @@ Spring Boot Auto-Configure for Terasoluna Framework 5.x Common Libraries & Exten
 
 ## Notes
 
-* Supports upper Java 8
-* Supports Terasoluna Gfw 5.5.1
-* Supports Spring Boot 2.2.1
+* Supports upper Java 11
+* Supports Spring Boot 2.7.4
+* Supports Terasoluna Gfw 5.7.1.SP1
 
 ----
 
@@ -33,7 +33,7 @@ Auto-Configure for Application using Terasoluna Framework 5.x Common Libraries.
 <dependency>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-autoconfigure</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -208,7 +208,7 @@ Enable Thymeleaf Dialect if provided `thymeleaf-extras-terasoluna-gfw`.
 
 ----
 
-## terasoluna-gfw-spring-boot-autoconfigure
+## terasoluna-gfw-spring-boot-test-autoconfigure
 
 Auto-Configure for Test using Terasoluna Framework 5.x Common Libraries.
 
@@ -218,7 +218,7 @@ Auto-Configure for Test using Terasoluna Framework 5.x Common Libraries.
 <dependency>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-test-autoconfigure</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 

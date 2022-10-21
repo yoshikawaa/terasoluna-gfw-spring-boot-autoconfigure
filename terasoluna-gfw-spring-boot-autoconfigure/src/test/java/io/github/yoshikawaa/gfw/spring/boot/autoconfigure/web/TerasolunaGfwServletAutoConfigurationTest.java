@@ -7,6 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,13 +29,19 @@ import org.springframework.web.bind.annotation.RestController;
 class TerasolunaGfwServletAutoConfigurationTest {
 
     @Nested
-    @WebMvcTest(controllers = TestConfig.MdcController.class)
+    @WebMvcTest(controllers = { TestConfig.SessionController.class, TestConfig.MdcController.class })
     @ImportAutoConfiguration({ TerasolunaGfwServletAutoConfiguration.class,
             TerasolunaGfwWebMvcAutoConfiguration.class })
     @Import(TestConfig.class)
     @WithMockUser
     @ExtendWith(OutputCaptureExtension.class)
     class MdcTest {
+
+        @Test
+        void testSessionCreated(@Autowired MockMvc mvc, CapturedOutput output) throws Exception {
+            mvc.perform(get("/session"));
+            assertThat(output).contains("attributeAdded");
+        }
 
         @Test
         void testXTrack(@Autowired MockMvc mvc, CapturedOutput output) throws Exception {
@@ -71,6 +80,16 @@ class TerasolunaGfwServletAutoConfigurationTest {
 
     @TestConfiguration
     static class TestConfig {
+
+        @RestController
+        @RequestMapping("/session")
+        static class SessionController {
+            @GetMapping
+            public String get(HttpSession session) {
+                session.setAttribute("test", "success");
+                return "session";
+            }
+        }
 
         @RestController
         @RequestMapping("/mdc")

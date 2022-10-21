@@ -15,20 +15,26 @@
  */
 package io.github.yoshikawaa.gfw.spring.boot.autoconfigure.web;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSessionListener;
+
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
+import org.springframework.session.web.http.SessionEventHttpSessionListenerAdapter;
 import org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter;
+import org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener;
 import org.terasoluna.gfw.web.logging.mdc.MDCClearFilter;
 import org.terasoluna.gfw.web.logging.mdc.XTrackMDCPutFilter;
 
@@ -43,6 +49,16 @@ import org.terasoluna.gfw.web.logging.mdc.XTrackMDCPutFilter;
 @ConditionalOnClass({ MDCClearFilter.class, XTrackMDCPutFilter.class })
 @AutoConfigureBefore(SecurityAutoConfiguration.class)
 public class TerasolunaGfwServletAutoConfiguration {
+
+    /**
+     * Build {@link HttpSessionEventLoggingListener}.
+     *
+     * @return Configured {@link HttpSessionEventLoggingListener}
+     */
+    @Bean
+    public ServletListenerRegistrationBean<HttpSessionEventLoggingListener> configureHttpSessionEventLoggingListener() {
+        return new ServletListenerRegistrationBean<>(new HttpSessionEventLoggingListener());
+    }
 
     /**
      * Build {@link MDCClearFilter}.
@@ -71,17 +87,17 @@ public class TerasolunaGfwServletAutoConfiguration {
     }
 
     /**
-     * Web Security Configurer for {@link UserIdMDCPutFilter}.
+     * Apply {@link UserIdMDCPutFilter} after {@link AnonymousAuthenticationFilter}.
      *
-     * @author Atsushi Yoshikawa
+     * @param http {@link HttpSecurity}
+     * @return Configured {@link SecurityFilterChain}
+     * @throws Exception failed to build {@link SecurityFilterChain}
      */
-    @Configuration
-    @ConditionalOnClass({ UserIdMDCPutFilter.class, WebSecurityConfigurer.class })
-    public class TerasolunaGfwWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
+    @Bean
+    @ConditionalOnClass({ UserIdMDCPutFilter.class, SecurityFilterChain.class })
+    public SecurityFilterChain configureUserIdMDCPutFilter(HttpSecurity http) throws Exception {
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.addFilterAfter(new UserIdMDCPutFilter(), AnonymousAuthenticationFilter.class);
-        }
+        http.addFilterAfter(new UserIdMDCPutFilter(), AnonymousAuthenticationFilter.class);
+        return http.build();
     }
 }
