@@ -15,10 +15,6 @@
  */
 package io.github.yoshikawaa.gfw.spring.boot.autoconfigure.web;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSessionListener;
-
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -32,7 +28,6 @@ import org.springframework.core.Ordered;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
-import org.springframework.session.web.http.SessionEventHttpSessionListenerAdapter;
 import org.terasoluna.gfw.security.web.logging.UserIdMDCPutFilter;
 import org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener;
 import org.terasoluna.gfw.web.logging.mdc.MDCClearFilter;
@@ -46,7 +41,7 @@ import org.terasoluna.gfw.web.logging.mdc.XTrackMDCPutFilter;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication(type = Type.SERVLET)
-@ConditionalOnClass({ MDCClearFilter.class, XTrackMDCPutFilter.class })
+@ConditionalOnClass({ HttpSessionEventLoggingListener.class, MDCClearFilter.class, XTrackMDCPutFilter.class })
 @AutoConfigureBefore(SecurityAutoConfiguration.class)
 public class TerasolunaGfwServletAutoConfiguration {
 

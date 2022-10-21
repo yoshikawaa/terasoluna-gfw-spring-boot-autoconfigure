@@ -8,18 +8,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.system.CapturedOutput;
 import org.springframework.boot.test.system.OutputCaptureExtension;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,18 +31,18 @@ import org.springframework.web.bind.annotation.RestController;
 class TerasolunaGfwServletAutoConfigurationTest {
 
     @Nested
-    @WebMvcTest(controllers = { TestConfig.SessionController.class, TestConfig.MdcController.class })
+    @SpringBootTest(classes = TestConfig.class, webEnvironment = WebEnvironment.RANDOM_PORT)
     @ImportAutoConfiguration({ TerasolunaGfwServletAutoConfiguration.class,
             TerasolunaGfwWebMvcAutoConfiguration.class })
-    @Import(TestConfig.class)
+    @AutoConfigureMockMvc
     @WithMockUser
     @ExtendWith(OutputCaptureExtension.class)
-    class MdcTest {
+    class DefaultTest {
 
         @Test
-        void testSessionCreated(@Autowired MockMvc mvc, CapturedOutput output) throws Exception {
-            mvc.perform(get("/session"));
-            assertThat(output).contains("attributeAdded");
+        void testSessionCreated(@Autowired TestRestTemplate rest, CapturedOutput output) throws Exception {
+            rest.getForEntity("/session", String.class);
+            assertThat(output).contains("sessionCreated");
         }
 
         @Test
@@ -78,15 +80,19 @@ class TerasolunaGfwServletAutoConfigurationTest {
         }
     }
 
-    @TestConfiguration
+    @SpringBootApplication
     static class TestConfig {
+
+        static void main(String[] args) {
+            SpringApplication.run(TestConfig.class, args);
+        }
 
         @RestController
         @RequestMapping("/session")
         static class SessionController {
             @GetMapping
-            public String get(HttpSession session) {
-                session.setAttribute("test", "success");
+            public String get(HttpServletRequest request) {
+                request.getSession();
                 return "session";
             }
         }

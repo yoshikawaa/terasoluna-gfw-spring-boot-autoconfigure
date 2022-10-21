@@ -48,6 +48,7 @@ Auto-Configure for Application using Terasoluna Framework 5.x Common Libraries.
   * [Exception Handling](#exception-handling)
   * [Trace Logging for Controllers](#trace-logging-for-controllers)
 * Web Features
+  * [Logging Session Events](#logging-session-events)
   * [Logging with Mapped Diagnostic Context (MDC)](#logging-with-mapped-diagnostic-context-mdc)
 * Thymeleaf Features
   * [Thymeleaf Dialect](#thymeleaf-dialect) (not Terasoluna Gfw support)
@@ -186,6 +187,14 @@ Set property to change behavior.
 | name                                          | type    | default |
 |-----------------------------------------------|---------|---------|
 | gfw.mvc.trace-logging.warn-handling-nanos     | Long    | -       |
+
+#### Logging Session Events
+
+Enable Debug/Trace Logging about Session Events if provided `terasoluna-gfw-web`.
+
+* `HttpSessionEventLoggingListener`
+
+Please set `logging.level.org.terasoluna.gfw.web.logging.HttpSessionEventLoggingListener=trace` to enable trace log.
 
 #### Logging with Mapped Diagnostic Context (MDC)
 

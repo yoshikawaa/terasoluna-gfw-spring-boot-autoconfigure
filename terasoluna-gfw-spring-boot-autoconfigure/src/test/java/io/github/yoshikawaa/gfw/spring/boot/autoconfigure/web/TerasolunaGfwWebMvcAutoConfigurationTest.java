@@ -35,6 +35,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -62,6 +63,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
 
     @Nested
     @WebMvcTest
+    @ContextConfiguration(classes = TestConfig.class)
     @ImportAutoConfiguration(TerasolunaGfwWebMvcAutoConfiguration.class)
     @WithMockUser
     @ExtendWith(OutputCaptureExtension.class)
@@ -124,6 +126,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
 
     @Nested
     @WebMvcTest(controllers = TestConfig.TraceLoggingController.class)
+    @ContextConfiguration(classes = TestConfig.class)
     @ImportAutoConfiguration(TerasolunaGfwWebMvcAutoConfiguration.class)
     @WithMockUser
     @TestPropertySource(properties = "gfw.mvc.trace-logging.warn-handling-nanos=100")
@@ -139,6 +142,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
 
     @Nested
     @WebMvcTest(controllers = TestConfig.TransactionTokenController.class)
+    @ContextConfiguration(classes = TestConfig.class)
     @ImportAutoConfiguration(TerasolunaGfwWebMvcAutoConfiguration.class)
     @WithMockUser
     @TestPropertySource(properties = "gfw.mvc.transaction-token.size-per-token-name=100")
@@ -156,6 +160,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
 
     @Nested
     @WebMvcTest(controllers = TestConfig.TransactionTokenController.class)
+    @ContextConfiguration(classes = TestConfig.class)
     @ImportAutoConfiguration({ TerasolunaGfwWebMvcAutoConfiguration.class, TestDisableCsrfAutoConfig.class })
     @WithMockUser
     class TransactionTokenCsrfDisabledTest {
@@ -173,6 +178,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
 
     @Nested
     @WebMvcTest(controllers = TestConfig.CodeListController.class)
+    @ContextConfiguration(classes = TestConfig.class)
     @ImportAutoConfiguration(TerasolunaGfwWebMvcAutoConfiguration.class)
     @WithMockUser
     @TestPropertySource(properties = "gfw.mvc.codelist.enabled=false")
@@ -191,6 +197,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
 
     @Nested
     @WebMvcTest(controllers = TestConfig.CodeListController.class)
+    @ContextConfiguration(classes = TestConfig.class)
     @ImportAutoConfiguration(TerasolunaGfwWebMvcAutoConfiguration.class)
     @WithMockUser
     @TestPropertySource(properties = "gfw.mvc.codelist.id-pattern=CODELIST_.+")
@@ -209,6 +216,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
 
     @Nested
     @WebMvcTest(controllers = TestConfig.ExceptionResolverController.class)
+    @ContextConfiguration(classes = TestConfig.class)
     @ImportAutoConfiguration(TerasolunaGfwWebMvcAutoConfiguration.class)
     @Import(TestExceptionResolverConfig.class)
     @WithMockUser
@@ -231,6 +239,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
 
     @Nested
     @WebMvcTest(controllers = TestConfig.ExceptionResolverController.class)
+    @ContextConfiguration(classes = TestConfig.class)
     @ImportAutoConfiguration({ TerasolunaGfwWebMvcAutoConfiguration.class, TerasolunaGfwCommonAutoConfiguration.class })
     @WithMockUser
     class ExceptionResolverNonCodeResolverTest {
