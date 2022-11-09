@@ -41,4 +41,7 @@
         <module>terasoluna-gfw-spring-boot-test-autoconfigure</module>
     </modules>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
 </project>
