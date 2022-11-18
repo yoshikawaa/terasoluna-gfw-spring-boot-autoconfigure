@@ -307,7 +307,7 @@
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
         <gpg.skip>true</gpg.skip>
-        <spring-boot.version>2.7.4</spring-boot.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
         <terasoluna-gfw.version>5.7.1.SP1.RELEASE</terasoluna-gfw.version>
         <thymeleaf-extras-terasoluna-gfw.version>1.0.1-SNAPSHOT</thymeleaf-extras-terasoluna-gfw.version>
         <spring-test-terasoluna-gfw.version>1.0.1-SNAPSHOT</spring-test-terasoluna-gfw.version>
