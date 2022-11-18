@@ -186,6 +186,8 @@ Set property to change behavior.
 
 #### Logging Session Events
 
+> since v1.0.1
+
 Enable Debug/Trace Logging about Session Events if provided `terasoluna-gfw-web`.
 
 * `HttpSessionEventLoggingListener`

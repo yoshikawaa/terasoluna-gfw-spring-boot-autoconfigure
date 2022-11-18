@@ -49,6 +49,7 @@ public class TerasolunaGfwServletAutoConfiguration {
      * Build {@link HttpSessionEventLoggingListener}.
      *
      * @return Configured {@link HttpSessionEventLoggingListener}
+     * @since 1.0.1
      */
     @Bean
     public ServletListenerRegistrationBean<HttpSessionEventLoggingListener> configureHttpSessionEventLoggingListener() {
