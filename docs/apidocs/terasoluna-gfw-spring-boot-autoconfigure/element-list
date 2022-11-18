@@ -1,0 +1,6 @@
+io.github.yoshikawaa.gfw.config.common
+io.github.yoshikawaa.gfw.config.web
+io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common
+io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.date.jodatime
+io.github.yoshikawaa.gfw.spring.boot.autoconfigure.thymeleaf
+io.github.yoshikawaa.gfw.spring.boot.autoconfigure.web
