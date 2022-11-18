@@ -40,7 +40,10 @@ jobs:
 
     - name: action-maven-publish
       uses: samuelmeuli/action-maven-publish@v1.4.0
+      if: ${{ matrix.java == '11' }}
       with:
         nexus_username: ${{ secrets.NEXUS_USERNAME }}
         nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-        maven_args: -Dmaven.test.skip=true
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+        maven_args: -Dmaven.test.skip=true -Dgpg.skip=false
