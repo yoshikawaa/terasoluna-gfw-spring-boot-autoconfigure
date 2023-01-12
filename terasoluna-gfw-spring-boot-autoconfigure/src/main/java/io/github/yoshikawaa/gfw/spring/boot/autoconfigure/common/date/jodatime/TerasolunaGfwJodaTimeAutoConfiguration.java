@@ -15,10 +15,10 @@
  */
 package io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.date.jodatime;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.terasoluna.gfw.common.date.jodatime.DefaultJodaTimeDateFactory;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 
@@ -27,7 +27,7 @@ import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
  *
  * @author Atsushi Yoshikawa
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @ConditionalOnClass(JodaTimeDateFactory.class)
 public class TerasolunaGfwJodaTimeAutoConfiguration {
 

@@ -15,14 +15,13 @@
  */
 package io.github.yoshikawaa.gfw.spring.boot.autoconfigure.thymeleaf;
 
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import io.github.yoshikawaa.gfw.web.thymeleaf.dialect.TerasolunaGfwDialect;
@@ -32,10 +31,9 @@ import io.github.yoshikawaa.gfw.web.thymeleaf.dialect.TerasolunaGfwDialect;
  *
  * @author Atsushi Yoshikawa
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(before = ThymeleafAutoConfiguration.class)
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass({ TerasolunaGfwDialect.class, SpringTemplateEngine.class })
-@AutoConfigureBefore(ThymeleafAutoConfiguration.class)
 public class TerasolunaGfwThymeleafAutoConfiguration {
 
     /**

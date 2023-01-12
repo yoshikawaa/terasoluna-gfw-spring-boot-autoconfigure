@@ -1,6 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.TerasolunaGfwCommonAutoConfiguration,\
-io.github.yoshikawaa.gfw.spring.boot.autoconfigure.thymeleaf.TerasolunaGfwThymeleafAutoConfiguration,\
-io.github.yoshikawaa.gfw.spring.boot.autoconfigure.web.TerasolunaGfwServletAutoConfiguration,\
-io.github.yoshikawaa.gfw.spring.boot.autoconfigure.web.TerasolunaGfwWebMvcAutoConfiguration

@@ -27,8 +27,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -64,12 +63,11 @@ import io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.TerasolunaGfwCo
  *
  * @author Atsushi Yoshikawa
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = { SecurityAutoConfiguration.class, TerasolunaGfwCommonAutoConfiguration.class },
+        before = WebMvcAutoConfiguration.class)
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass({ TraceLoggingInterceptor.class, TransactionTokenInterceptor.class, CodeListInterceptor.class,
         SystemExceptionResolver.class, ExceptionCodeResolver.class, TransactionTokenRequestDataValueProcessor.class })
-@AutoConfigureAfter({ SecurityAutoConfiguration.class, TerasolunaGfwCommonAutoConfiguration.class })
-@AutoConfigureBefore(WebMvcAutoConfiguration.class)
 @EnableConfigurationProperties(TerasolunaGfwWebMvcProperties.class)
 public class TerasolunaGfwWebMvcAutoConfiguration {
 

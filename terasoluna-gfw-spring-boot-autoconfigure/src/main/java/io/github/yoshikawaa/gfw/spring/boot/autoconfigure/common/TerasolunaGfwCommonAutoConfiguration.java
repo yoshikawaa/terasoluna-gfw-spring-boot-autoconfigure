@@ -16,10 +16,10 @@
 package io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common;
 
 import org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.terasoluna.gfw.common.exception.ExceptionCodeResolver;
 import org.terasoluna.gfw.common.exception.ExceptionLogger;
 import org.terasoluna.gfw.common.exception.ResultMessagesLoggingInterceptor;
@@ -31,7 +31,7 @@ import io.github.yoshikawaa.gfw.config.common.ExceptionCodeResolverConfigurer;
  *
  * @author Atsushi Yoshikawa
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @ConditionalOnClass({ ExceptionCodeResolver.class, ExceptionLogger.class, ResultMessagesLoggingInterceptor.class })
 public class TerasolunaGfwCommonAutoConfiguration {
 
