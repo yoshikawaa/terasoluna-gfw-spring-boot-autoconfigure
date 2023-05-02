@@ -4,10 +4,12 @@ title: Reference Doc
 
 Spring Boot Auto-Configure for Terasoluna Framework 5.x Common Libraries & Extensions.
 
+> This is a personal experimental project unrelated to TERASOLUNA. TERASOLUNA is a registered trademark of NTT DATA Corporation.
+
 ## Notes
 
 * Supports upper Java 11
-* Supports Spring Boot 2.7.5
+* Supports Spring Boot 2.7.11
 * Supports Terasoluna Gfw 5.7.1.SP1
 
 ----
