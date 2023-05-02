@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Nested;
@@ -43,7 +44,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.NestedServletException;
 import org.terasoluna.gfw.common.codelist.CodeList;
 import org.terasoluna.gfw.common.codelist.SimpleMapCodeList;
 import org.terasoluna.gfw.common.exception.BusinessException;
@@ -235,6 +235,13 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
                     .andExpect(status().isInternalServerError()) //
                     .andExpect(view().name("error"));
         }
+
+        @Test
+        void testIOException(@Autowired MockMvc mvc) throws Exception {
+            mvc.perform(get("/exceptionresolver/systemException")) //
+                    .andExpect(status().isInternalServerError()) //
+                    .andExpect(view().name("error"));
+        }
     }
 
     @Nested
@@ -352,7 +359,7 @@ class TerasolunaGfwWebMvcAutoConfigurationTest {
                     // .statusCode("error/businessError", 409) //
                     .statusCode("error/transactionTokenError", 409) //
                     .statusCode("error/dataAccessError", 500) //
-                    .exclude(NestedServletException.class) //
+                    .exclude(IOException.class) //
                     .defaultErrorView("error") //
                     .defaultStatusCode(500);
         }

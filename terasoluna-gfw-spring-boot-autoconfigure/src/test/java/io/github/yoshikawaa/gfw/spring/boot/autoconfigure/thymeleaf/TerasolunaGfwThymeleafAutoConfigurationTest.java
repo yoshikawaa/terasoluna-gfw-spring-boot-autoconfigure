@@ -15,6 +15,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenCheck;
 import org.terasoluna.gfw.web.token.transaction.TransactionTokenType;
 
@@ -42,6 +43,7 @@ class TerasolunaGfwThymeleafAutoConfigurationTest {
     static class TestConfig {
         
         @Controller
+        @RequestMapping("/")
         @TransactionTokenCheck("/")
         static class DialectController {
             @GetMapping

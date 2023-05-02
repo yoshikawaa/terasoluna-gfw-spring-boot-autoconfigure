@@ -15,13 +15,13 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.util.NestedServletException;
 import org.terasoluna.gfw.common.exception.BusinessException;
 import org.terasoluna.gfw.common.exception.ExceptionCodeResolver;
 import org.terasoluna.gfw.common.exception.ExceptionLogger;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
 import io.github.yoshikawaa.gfw.config.common.ExceptionCodeResolverConfigurer;
+import jakarta.servlet.ServletException;
 
 class TerasolunaGfwCommonAutoConfigurationTest {
 
@@ -31,8 +31,8 @@ class TerasolunaGfwCommonAutoConfigurationTest {
     class ExceptionResolverTest {
 
         @Test
-        void testNestedServletException(@Autowired ExceptionCodeResolver exceptionCodeResolver) {
-            String code = exceptionCodeResolver.resolveExceptionCode(new NestedServletException("test-message"));
+        void testServletException(@Autowired ExceptionCodeResolver exceptionCodeResolver) {
+            String code = exceptionCodeResolver.resolveExceptionCode(new ServletException("test-message"));
             assertThat(code).isEqualTo("e.xx.fw.9001");
         }
 
@@ -51,8 +51,8 @@ class TerasolunaGfwCommonAutoConfigurationTest {
     class ExceptionCodeResolverCustomTest {
 
         @Test
-        void testNestedServletException(@Autowired ExceptionCodeResolver exceptionCodeResolver) {
-            String code = exceptionCodeResolver.resolveExceptionCode(new NestedServletException("test-message"));
+        void testServletException(@Autowired ExceptionCodeResolver exceptionCodeResolver) {
+            String code = exceptionCodeResolver.resolveExceptionCode(new ServletException("test-message"));
             assertThat(code).isEqualTo("e.xx.fw.9001");
         }
 

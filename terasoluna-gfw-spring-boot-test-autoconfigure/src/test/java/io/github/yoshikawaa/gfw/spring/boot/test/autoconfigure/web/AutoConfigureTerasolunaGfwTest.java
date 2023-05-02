@@ -120,8 +120,8 @@ class AutoConfigureTerasolunaGfwTest {
 
         @Bean
         SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http.authorizeRequests().anyRequest().permitAll();
-            http.csrf().disable();
+            http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
+            http.csrf(csrf -> csrf.disable());
             return http.build();
         }
 

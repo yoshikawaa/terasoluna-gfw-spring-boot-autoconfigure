@@ -1,5 +1,5 @@
 io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.TerasolunaGfwCommonAutoConfiguration
-io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.date.jodatime.TerasolunaGfwJodaTimeAutoConfiguration
+io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.time.TerasolunaGfwDateTimeAutoConfiguration
 io.github.yoshikawaa.gfw.spring.boot.autoconfigure.thymeleaf.TerasolunaGfwThymeleafAutoConfiguration
 io.github.yoshikawaa.gfw.spring.boot.autoconfigure.web.TerasolunaGfwServletAutoConfiguration
 io.github.yoshikawaa.gfw.spring.boot.autoconfigure.web.TerasolunaGfwWebMvcAutoConfiguration

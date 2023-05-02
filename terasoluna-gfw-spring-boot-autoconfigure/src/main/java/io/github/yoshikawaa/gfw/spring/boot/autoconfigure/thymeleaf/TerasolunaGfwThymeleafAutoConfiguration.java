@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import io.github.yoshikawaa.gfw.web.thymeleaf.dialect.TerasolunaGfwDialect;
 

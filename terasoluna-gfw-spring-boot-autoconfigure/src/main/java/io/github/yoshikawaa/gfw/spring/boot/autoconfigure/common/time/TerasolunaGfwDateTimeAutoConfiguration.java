@@ -13,32 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.date.jodatime;
+package io.github.yoshikawaa.gfw.spring.boot.autoconfigure.common.time;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.terasoluna.gfw.common.date.jodatime.DefaultJodaTimeDateFactory;
-import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.time.ClockFactory;
+import org.terasoluna.gfw.common.time.DefaultClockFactory;
 
 /**
- * Spring Boot Auto Configuration for {@literal terasoluna-gfw-jodatime}.
+ * Spring Boot Auto Configuration for {@literal terasoluna-gfw-common} JSR-310 Date and Time API.
  *
  * @author Atsushi Yoshikawa
+ * @since 1.1.0
  */
 @AutoConfiguration
-@ConditionalOnClass(JodaTimeDateFactory.class)
-public class TerasolunaGfwJodaTimeAutoConfiguration {
+@ConditionalOnClass(ClockFactory.class)
+public class TerasolunaGfwDateTimeAutoConfiguration {
 
     /**
-     * Build {@link DefaultJodaTimeDateFactory}.
+     * Build {@link DefaultClockFactory}.
      *
-     * @return Configured {@link DefaultJodaTimeDateFactory}
+     * @return Configured {@link DefaultClockFactory}
      */
     @Bean
-    @ConditionalOnMissingBean(JodaTimeDateFactory.class)
-    public JodaTimeDateFactory dateFactory() {
-        return new DefaultJodaTimeDateFactory();
+    @ConditionalOnMissingBean(ClockFactory.class)
+    public ClockFactory clockFactory() {
+        return new DefaultClockFactory();
     }
 }

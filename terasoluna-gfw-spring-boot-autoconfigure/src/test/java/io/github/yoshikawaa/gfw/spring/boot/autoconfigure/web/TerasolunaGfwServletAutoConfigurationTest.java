@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

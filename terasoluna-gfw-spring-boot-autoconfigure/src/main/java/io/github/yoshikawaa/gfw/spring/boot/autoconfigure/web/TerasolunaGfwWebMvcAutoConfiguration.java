@@ -46,7 +46,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.support.RequestDataValueProcessor;
-import org.springframework.web.util.NestedServletException;
 import org.terasoluna.gfw.common.exception.ExceptionCodeResolver;
 import org.terasoluna.gfw.web.codelist.CodeListInterceptor;
 import org.terasoluna.gfw.web.exception.SystemExceptionResolver;
@@ -133,7 +132,6 @@ public class TerasolunaGfwWebMvcAutoConfiguration {
                 .statusCode("error/businessError", 409) //
                 .statusCode("error/transactionTokenError", 409) //
                 .statusCode("error/dataAccessError", 500) //
-                .exclude(NestedServletException.class) //
                 .defaultErrorView("error") //
                 .defaultStatusCode(500);
     }

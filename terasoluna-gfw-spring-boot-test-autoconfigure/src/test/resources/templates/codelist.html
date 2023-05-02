@@ -3,10 +3,10 @@
 <title>codelist</title>
 </head>
 <body>
-    <ul th:each="item : ${#request.getAttribute('CL_SIMPLE')}">
+    <ul th:each="item : ${CL_SIMPLE}">
         <li th:text="${item.value}"></li>
     </ul>
-    <ul th:each="item : ${#request.getAttribute('CODELIST_EXTEND')}">
+    <ul th:each="item : ${CODELIST_EXTEND}">
         <li th:text="${item.value}"></li>
     </ul>
 </body>
