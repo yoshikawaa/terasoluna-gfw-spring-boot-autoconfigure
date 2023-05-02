@@ -8,9 +8,9 @@ Spring Boot Auto-Configure for Terasoluna Framework 5.x Common Libraries & Exten
 
 ## Notes
 
-* Supports upper Java 11
-* Supports Spring Boot 2.7.11
-* Supports Terasoluna Gfw 5.7.1.SP1
+* Supports upper Java 17
+* Supports Spring Boot 3.0.6
+* Supports Terasoluna Gfw 5.8.1
 
 ----
 
@@ -31,7 +31,7 @@ Auto-Configure for Application using Terasoluna Framework 5.x Common Libraries.
 <dependency>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-autoconfigure</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -39,7 +39,7 @@ Auto-Configure for Application using Terasoluna Framework 5.x Common Libraries.
 
 * Common Features
   - [Logging Exceptions](#logging-exceptions)
-  - [Date Factory](#date-factory)
+  - [Clock Factory](#clock-factory)
 * Web MVC Features
   * [Transaction Token](#transaction-token)
   * [CodeList](#codelist)
@@ -79,24 +79,22 @@ ExceptionCodeResolverConfigurer exceptionCodeResolverConfigurer() {
 
 > `ExceptionCodeResolver` is also used by `SystemExceptionResolver`.
 
-#### Date Factory
+#### Clock Factory
 
-Enable Date Factory if provided `terasoluna-gfw-jodatime`.
+> since v1.1.0
 
-* `DefaultJodaTimeDateFactory`
+Enable Clock Factory for JSR-310 Date and Time API if provided `terasoluna-gfw-common`.
 
-`JodaTimeDateFactory` bean override `DefaultJodaTimeDateFactory` bean.
+* `DefaultClockFactory`
+
+`ClockFactory` bean override `DefaultClockFactory` bean.
 
 ```java
 @Bean
-JodaTimeDateFactory dateFactory(DataSource dataSource) {
-    JdbcFixedJodaTimeDateFactory dateFactory = new JdbcFixedJodaTimeDateFactory();
-    dateFacotry.setDataSource(dataSource);
-    return dateFactory;
+ClockFactory clockFactory(DataSource dataSource, @Value("clock.sql") String sql) {
+    return return new JdbcClockFactory(dataSource, sql);
 }
 ```
-
-> Date Factory does not yet support JSR-310.
 
 #### Transaction Token
 
@@ -160,7 +158,6 @@ SystemExceptionResolverConfigurer systemExceptionResolverConfigurer() {
         .statusCode("error/businessError", 409)
         .statusCode("error/transactionTokenError", 409)
         .statusCode("error/dataAccessError", 500)
-        .exclude(NestedServletException.class)
         .defaultErrorView("error")
         .defaultStatusCode(500);
 }
@@ -227,7 +224,7 @@ Auto-Configure for Test using Terasoluna Framework 5.x Common Libraries.
 <dependency>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-test-autoconfigure</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 

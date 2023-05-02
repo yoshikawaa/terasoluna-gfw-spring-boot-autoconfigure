@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-test-autoconfigure</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <name>terasoluna-gfw-spring-boot-test-autoconfigure</name>
     <description>Spring Boot Test Auto-Configure for Terasoluna Gfw</description>
@@ -282,7 +282,7 @@
         <gpg.skip>true</gpg.skip>
         <spring-boot.version>3.0.6</spring-boot.version>
         <terasoluna-gfw.version>5.8.1.RELEASE</terasoluna-gfw.version>
-        <thymeleaf-extras-terasoluna-gfw.version>1.1.0-SNAPSHOT</thymeleaf-extras-terasoluna-gfw.version>
-        <spring-test-terasoluna-gfw.version>1.1.0-SNAPSHOT</spring-test-terasoluna-gfw.version>
+        <thymeleaf-extras-terasoluna-gfw.version>1.1.0</thymeleaf-extras-terasoluna-gfw.version>
+        <spring-test-terasoluna-gfw.version>1.1.0</spring-test-terasoluna-gfw.version>
     </properties>
 </project>

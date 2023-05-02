@@ -10,9 +10,9 @@ Spring Boot Auto-Configure for Terasoluna Framework 5.x Common Libraries & Exten
 
 ## Notes
 
-* Supports upper Java 11
-* Supports Spring Boot 2.7.11
-* Supports Terasoluna Gfw 5.7.1.SP1
+* Supports upper Java 17
+* Supports Spring Boot 3.0.6
+* Supports Terasoluna Gfw 5.8.1
 
 ## Docs
 
