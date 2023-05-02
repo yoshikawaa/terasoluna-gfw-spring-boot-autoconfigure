@@ -31,7 +31,7 @@ Auto-Configure for Application using Terasoluna Framework 5.x Common Libraries.
 <dependency>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-autoconfigure</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -227,7 +227,7 @@ Auto-Configure for Test using Terasoluna Framework 5.x Common Libraries.
 <dependency>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-test-autoconfigure</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 

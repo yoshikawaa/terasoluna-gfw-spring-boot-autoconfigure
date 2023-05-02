@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-test-autoconfigure</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <name>terasoluna-gfw-spring-boot-test-autoconfigure</name>
     <description>Spring Boot Test Auto-Configure for Terasoluna Gfw</description>
