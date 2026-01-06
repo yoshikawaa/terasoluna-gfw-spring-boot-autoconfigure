@@ -22,10 +22,11 @@ jobs:
         java-version: ${{ matrix.java }}
         distribution: 'microsoft'
         cache: maven
-    - name: maven-settings-action
-      uses: s4u/maven-settings-action@v2.7.0
-      with:
-        sonatypeSnapshots: true
+        server-id: central
+        server-username: MAVEN_USERNAME
+        server-password: MAVEN_PASSWORD
+        gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+        gpg-passphrase: MAVEN_GPG_PASSPHRASE
     - name: Build with Maven
       run: |
         mvn -B -U clean install
@@ -38,12 +39,11 @@ jobs:
         project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
         coverage-reports: terasoluna-gfw-spring-boot-autoconfigure/target/site/jacoco/jacoco.xml
 
-    - name: action-maven-publish
-      uses: samuelmeuli/action-maven-publish@v1.4.0
+    - name: Deploy with Maven
       if: ${{ matrix.java == '17' }}
-      with:
-        nexus_username: ${{ secrets.NEXUS_USERNAME }}
-        nexus_password: ${{ secrets.NEXUS_PASSWORD }}
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
-        maven_args: -Dmaven.test.skip=true -Dgpg.skip=false
+      run: |
+        mvn -B deploy -Dmaven.test.skip=true -Dgpg.skip=false
+      env:
+        MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

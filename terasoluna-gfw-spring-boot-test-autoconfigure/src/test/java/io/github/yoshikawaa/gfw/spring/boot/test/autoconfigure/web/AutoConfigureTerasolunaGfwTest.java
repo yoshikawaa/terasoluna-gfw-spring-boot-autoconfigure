@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 import java.util.Collections;
 
@@ -64,14 +65,14 @@ class AutoConfigureTerasolunaGfwTest {
             mvc.perform(get("/transactiontoken")) //
                     .andExpect(status().isOk()) //
                     .andExpect(view().name("transactiontoken")) //
-                    .andExpect(xpath("//form/input[@type='hidden']").nodeCount(1)) //
+                    .andExpect(xpath("//form/input[@type='hidden']").nodeCount(2)) //
                     .andExpect(xpath("//form/input[@type='hidden' and @name='_TRANSACTION_TOKEN']").exists());
 
-            mvc.perform(post("/transactiontoken")) //
+            mvc.perform(post("/transactiontoken").with(csrf())) //
                     .andExpect(status().isConflict()) //
                         .andExpect(view().name("error/transactionTokenError"));
 
-            mvc.perform(post("/transactiontoken").with(transaction("/transactiontoken"))) //
+            mvc.perform(post("/transactiontoken").with(csrf()).with(transaction("/transactiontoken"))) //
                     .andExpect(status().isOk()) //
                     .andExpect(view().name("transactiontoken"));
         }
@@ -117,13 +118,6 @@ class AutoConfigureTerasolunaGfwTest {
 
     @SpringBootConfiguration
     static class TestConfig {
-
-        @Bean
-        SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
-            http.csrf(csrf -> csrf.disable());
-            return http.build();
-        }
 
         @RestController
         @RequestMapping("/tracelogging")

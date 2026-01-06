@@ -9,8 +9,8 @@ Spring Boot Auto-Configure for Terasoluna Framework 5.x Common Libraries & Exten
 ## Notes
 
 * Supports upper Java 17
-* Supports Spring Boot 3.0.6
-* Supports Terasoluna Gfw 5.8.1
+* Supports Spring Boot 3.5.9
+* Supports Terasoluna Gfw 5.10.0
 
 ----
 
@@ -31,7 +31,7 @@ Auto-Configure for Application using Terasoluna Framework 5.x Common Libraries.
 <dependency>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-autoconfigure</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -224,7 +224,7 @@ Auto-Configure for Test using Terasoluna Framework 5.x Common Libraries.
 <dependency>
     <groupId>io.github.yoshikawaa.gfw.spring.boot</groupId>
     <artifactId>terasoluna-gfw-spring-boot-test-autoconfigure</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
